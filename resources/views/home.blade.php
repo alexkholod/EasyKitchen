@@ -11,9 +11,15 @@
     <div class="container">
         <div class="row justify-content-center mt-3 mb-auto">
             <div class="col-12 mb-1">
+                <form action="{{ route('storage', 3 )}}" method="get">
+                    @csrf
+                    {{ Form::submit('Верхний отдел', ['class' => 'btn btn-info col-12 m-auto', 'id' => 3]) }}
+                </form>
+            </div>
+            <div class="col-12 mb-1">
                 <form action="{{ route('storage', 1 )}}" method="get">
                     @csrf
-                        {{ Form::submit('Верхний отдел', ['class' => 'btn btn-info col-12 m-auto', 'id' => 1]) }}
+                        {{ Form::submit('Средний отдел', ['class' => 'btn btn-info col-12 m-auto', 'id' => 1]) }}
                 </form>
             </div>
             <div class="col-12 mb-1">
@@ -22,12 +28,7 @@
                     {{ Form::submit('Нижний отдел', ['class' => 'btn btn-info col-12 m-auto', 'id' => 2]) }}
                 </form>
             </div>
-            <div class="col-12 mb-1">
-                <form action="{{ route('storage', 3 )}}" method="get">
-                    @csrf
-                    {{ Form::submit('Дверца', ['class' => 'btn btn-info col-12 m-auto', 'id' => 3]) }}
-                </form>
-            </div>
+
             <div class="col-12 mb-1">
                 <form action="{{ route('storage', 4 )}}" method="get">
                     @csrf

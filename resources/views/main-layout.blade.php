@@ -28,13 +28,13 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('storage', 1 )}}">Верхний отдел</a>
+                    <a class="nav-link" href="{{ route('storage', 3 )}}">Верхний отдел</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('storage', 1 )}}">Средний отдел</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('storage', 2 )}}">Нижний отдел</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('storage', 3 )}}">Дверца</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('storage', 4 )}}">Холодильник</a>
