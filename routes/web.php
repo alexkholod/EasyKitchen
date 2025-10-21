@@ -13,18 +13,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
+Route::get('/', function () {
+    return redirect()->route('login');
+});
 
 Auth::routes();
 
-//Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 Route::middleware('auth')->group(function () {
 
-    Route::get('/', 'ProductController@makeMainView')
+    Route::get('/home', 'ProductController@makeMainView')
         ->name('home');
+
+    Route::get('/search', 'ProductController@search')
+        ->name('search');
+
+    Route::get('/storages', function () {
+        return view('storage-select');
+    })->name('storages');
+
+    Route::get('/settings', function () {
+        $totalProducts = \App\Models\Product::count();
+        return view('settings', compact('totalProducts'));
+    })->name('settings');
 
     Route::get('storage/{id}', 'ProductController@storageView')
         ->name('storage');
@@ -40,5 +50,7 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/add-product/added', 'ProductController@add')
         ->name('added');
-});
 
+    Route::put('/product/{id}/update', 'ProductController@update')
+        ->name('update-product');
+});

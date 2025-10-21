@@ -1,0 +1,913 @@
+/* iOS-стиль дизайн для EasyKitchen */
+
+/* CSS переменные для цветовой схемы */
+:root {
+    --primary-color: #0095B6;
+    --primary-dark: #007A96;
+    --primary-light: #4DB8D1;
+    --secondary-color: #F2F2F7;
+    --background-color: #F2F2F7;
+    --surface-color: #FFFFFF;
+    --text-primary: #000000;
+    --text-secondary: #8E8E93;
+    --success-color: #34C759;
+    --warning-color: #FF9500;
+    --danger-color: #FF3B30;
+    --border-color: #C6C6C8;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+
+    /* iOS-специфичные переменные */
+    --ios-border-radius: 12px;
+    --ios-border-radius-large: 16px;
+    --ios-spacing: 16px;
+    --ios-spacing-small: 8px;
+    --ios-spacing-large: 24px;
+    --ios-font-size-large: 20px;
+    --ios-font-size-medium: 17px;
+    --ios-font-size-small: 15px;
+    --ios-font-size-caption: 13px;
+}
+
+/* Базовые стили для iOS */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-primary);
+    margin: 0;
+    padding: 0;
+    line-height: 1.4;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Поддержка безопасных зон для iPhone с челкой и Dynamic Island */
+@supports (padding: max(0px)) {
+    .safe-area-top {
+        padding-top: max(env(safe-area-inset-top), 20px);
+    }
+
+    .safe-area-bottom {
+        padding-bottom: max(env(safe-area-inset-bottom), 20px);
+    }
+
+    .safe-area-left {
+        padding-left: max(env(safe-area-inset-left), 0px);
+    }
+
+    .safe-area-right {
+        padding-right: max(env(safe-area-inset-right), 0px);
+    }
+}
+
+/* Контейнер приложения */
+.app-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--background-color);
+}
+
+/* Навигационная панель в стиле iOS */
+.ios-navbar {
+    background-color: var(--primary-color);
+    color: white;
+    padding: var(--ios-spacing);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 1px 3px var(--shadow-color);
+}
+
+.ios-navbar-title {
+    font-size: var(--ios-font-size-large);
+    font-weight: 600;
+    margin: 0;
+}
+
+.ios-navbar-subtitle {
+    font-size: var(--ios-font-size-small);
+    opacity: 0.8;
+    margin: 0;
+}
+
+/* Кнопки в стиле iOS */
+.ios-button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--ios-border-radius);
+    padding: 12px 24px;
+    font-size: var(--ios-font-size-medium);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 149, 182, 0.3);
+    width: 100%;
+    margin-bottom: var(--ios-spacing-small);
+}
+
+.ios-button:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 149, 182, 0.4);
+}
+
+.ios-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0, 149, 182, 0.3);
+}
+
+.ios-button-secondary {
+    background-color: var(--surface-color);
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+}
+
+.ios-button-secondary:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* Карточки в стиле iOS */
+.ios-card {
+    background-color: var(--surface-color);
+    border-radius: var(--ios-border-radius-large);
+    padding: var(--ios-spacing);
+    margin-bottom: var(--ios-spacing);
+    box-shadow: 0 2px 8px var(--shadow-color);
+    border: 1px solid var(--border-color);
+}
+
+.ios-card-header {
+    font-size: var(--ios-font-size-medium);
+    font-weight: 600;
+    margin-bottom: var(--ios-spacing-small);
+    color: var(--text-primary);
+}
+
+/* Алерты в стиле iOS */
+.ios-alert {
+    border-radius: var(--ios-border-radius);
+    padding: var(--ios-spacing);
+    margin-bottom: var(--ios-spacing);
+    border: none;
+    font-size: var(--ios-font-size-small);
+    line-height: 1.4;
+}
+
+.ios-alert-info {
+    background-color: #E3F2FD;
+    color: #1976D2;
+    border-left: 4px solid #2196F3;
+}
+
+.ios-alert-warning {
+    background-color: #FFF3E0;
+    color: #F57C00;
+    border-left: 4px solid var(--warning-color);
+}
+
+.ios-alert-danger {
+    background-color: #FFEBEE;
+    color: #D32F2F;
+    border-left: 4px solid var(--danger-color);
+}
+
+.ios-alert-success {
+    background-color: #E8F5E8;
+    color: #2E7D32;
+    border-left: 4px solid var(--success-color);
+}
+
+/* Формы в стиле iOS */
+.ios-form-group {
+    margin-bottom: var(--ios-spacing);
+}
+
+.ios-label {
+    display: block;
+    font-size: var(--ios-font-size-small);
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: var(--ios-spacing-small);
+}
+
+.ios-input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--ios-border-radius);
+    font-size: var(--ios-font-size-medium);
+    background-color: var(--surface-color);
+    color: var(--text-primary);
+    transition: border-color 0.2s ease;
+}
+
+.ios-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 149, 182, 0.1);
+}
+
+.ios-select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--ios-border-radius);
+    font-size: var(--ios-font-size-medium);
+    background-color: var(--surface-color);
+    color: var(--text-primary);
+    cursor: pointer;
+}
+
+/* Список продуктов */
+.ios-product-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ios-spacing-small);
+}
+
+/* Список складов - действительно компактный дизайн */
+.ios-storage-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.ios-storage-item {
+    background-color: var(--surface-color);
+    border-radius: 6px;
+    padding: 8px 6px;
+    box-shadow: 0 1px 2px var(--shadow-color);
+    border: 1px solid var(--border-color);
+    transition: all 0.2s ease;
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--text-primary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-height: 45px;
+    justify-content: center;
+}
+
+.ios-storage-item:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px var(--shadow-color);
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.ios-storage-item:hover .ios-storage-icon {
+    color: white;
+}
+
+.ios-storage-icon {
+    width: 18px;
+    height: 18px;
+    margin-bottom: 2px;
+    color: var(--primary-color);
+    transition: color 0.2s ease;
+}
+
+.ios-storage-name {
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.1;
+    margin: 0;
+}
+
+/* Модальное окно в стиле iOS */
+.ios-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 2000;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.ios-modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.ios-modal {
+    background-color: var(--surface-color);
+    border-radius: 16px 16px 0 0;
+    width: 100%;
+    max-width: 500px;
+    max-height: 80vh;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.ios-modal-overlay.show .ios-modal {
+    transform: translateY(0);
+}
+
+.ios-modal-header {
+    padding: 20px 20px 10px 20px;
+    border-bottom: 1px solid var(--border-color);
+    text-align: center;
+    position: relative;
+}
+
+.ios-modal-title {
+    font-size: var(--ios-font-size-large);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.ios-modal-close {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.2s ease;
+}
+
+.ios-modal-close:hover {
+    background-color: var(--secondary-color);
+}
+
+.ios-modal-content {
+    padding: 20px;
+}
+
+.ios-modal-storage-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.ios-modal-storage-item {
+    background-color: var(--surface-color);
+    border-radius: 12px;
+    padding: 16px 12px;
+    box-shadow: 0 2px 8px var(--shadow-color);
+    border: 1px solid var(--border-color);
+    transition: all 0.2s ease;
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--text-primary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-height: 80px;
+    justify-content: center;
+}
+
+.ios-modal-storage-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px var(--shadow-color);
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.ios-modal-storage-item:hover .ios-modal-storage-icon {
+    color: white;
+}
+
+.ios-modal-storage-icon {
+    width: 28px;
+    height: 28px;
+    margin-bottom: 8px;
+    color: var(--primary-color);
+    transition: color 0.2s ease;
+}
+
+.ios-modal-storage-name {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.2;
+    margin: 0;
+}
+
+/* Компактный список продуктов в стиле iOS */
+.ios-compact-product-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background-color: var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.ios-compact-product-item {
+    background-color: var(--surface-color);
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    border: none;
+    text-decoration: none;
+    color: var(--text-primary);
+}
+
+.ios-compact-product-item:hover {
+    background-color: var(--secondary-color);
+}
+
+.ios-compact-product-item:active {
+    background-color: var(--border-color);
+}
+
+.ios-compact-product-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.ios-compact-product-name {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin: 0 0 2px 0;
+    line-height: 1.3;
+}
+
+.ios-compact-product-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 8px;
+}
+
+.ios-compact-product-description {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.2;
+    flex: 1;
+    min-width: 0;
+}
+
+.ios-compact-product-date {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.2;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.ios-compact-product-arrow {
+    width: 20px;
+    height: 20px;
+    color: var(--text-secondary);
+    margin-left: 12px;
+    flex-shrink: 0;
+}
+
+.ios-compact-product-arrow svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* Поиск в стиле iOS */
+.ios-search-form {
+    margin: 0;
+}
+
+.ios-search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.ios-search-icon {
+    position: absolute;
+    left: 12px;
+    width: 20px;
+    height: 20px;
+    color: var(--text-secondary);
+    z-index: 2;
+}
+
+.ios-search-input {
+    width: 100%;
+    padding: 12px 12px 12px 44px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 16px;
+    background-color: var(--surface-color);
+    color: var(--text-primary);
+    transition: all 0.2s ease;
+}
+
+.ios-search-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 149, 182, 0.1);
+}
+
+.ios-search-input::placeholder {
+    color: var(--text-secondary);
+}
+
+.ios-search-clear {
+    position: absolute;
+    right: 12px;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 50%;
+    transition: background-color 0.2s ease;
+    z-index: 2;
+}
+
+.ios-search-clear:hover {
+    background-color: var(--secondary-color);
+}
+
+.ios-search-clear svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* Свайп для удаления в стиле iOS */
+.ios-swipe-container {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--surface-color);
+}
+
+.ios-swipe-content {
+    position: relative;
+    z-index: 2;
+    background-color: var(--surface-color);
+    transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    cursor: pointer;
+}
+
+.ios-swipe-actions {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 80px;
+    background-color: #ff3b30;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    z-index: 1;
+}
+
+.ios-swipe-delete {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+.ios-swipe-delete:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.ios-swipe-delete svg {
+    width: 20px;
+    height: 20px;
+}
+
+.ios-swipe-container.swiped .ios-swipe-content {
+    transform: translateX(-80px);
+}
+
+.ios-swipe-container.swiped .ios-swipe-actions {
+    transform: translateX(0);
+}
+
+.ios-product-item {
+    background-color: var(--surface-color);
+    border-radius: var(--ios-border-radius);
+    padding: var(--ios-spacing);
+    box-shadow: 0 1px 3px var(--shadow-color);
+    border: 1px solid var(--border-color);
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.ios-product-item:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.ios-product-name {
+    font-size: var(--ios-font-size-medium);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.ios-product-description {
+    font-size: var(--ios-font-size-small);
+    color: var(--text-secondary);
+    margin-bottom: var(--ios-spacing-small);
+}
+
+.ios-product-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--ios-spacing-small);
+}
+
+.ios-delete-button {
+    background-color: var(--danger-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: var(--ios-font-size-caption);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.ios-delete-button:hover {
+    background-color: #E53E3E;
+    transform: scale(1.05);
+}
+
+/* Нижняя навигация в стиле iOS */
+.ios-bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--surface-color);
+    border-top: 1px solid var(--border-color);
+    padding: var(--ios-spacing-small) 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0 -2px 8px var(--shadow-color);
+    max-width: 100%;
+    margin: 0;
+}
+
+.ios-bottom-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: var(--text-secondary);
+    transition: color 0.2s ease;
+    padding: 8px;
+    border-radius: 8px;
+    min-width: 60px;
+}
+
+.ios-bottom-nav-item:hover,
+.ios-bottom-nav-item.active {
+    color: var(--primary-color);
+    background-color: rgba(0, 149, 182, 0.1);
+}
+
+.ios-bottom-nav-icon {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 4px;
+    fill: currentColor;
+}
+
+.ios-bottom-nav-label {
+    font-size: var(--ios-font-size-caption);
+    font-weight: 500;
+}
+
+/* Контент с отступом для нижней навигации */
+.ios-content {
+    padding-bottom: 80px;
+    padding-top: var(--ios-spacing);
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+/* Адаптивность для разных размеров экранов */
+@media (max-width: 375px) {
+    :root {
+        --ios-spacing: 12px;
+        --ios-spacing-small: 6px;
+        --ios-spacing-large: 18px;
+    }
+
+    .ios-button {
+        padding: 10px 20px;
+        font-size: var(--ios-font-size-small);
+    }
+}
+
+@media (min-width: 414px) {
+    .ios-content {
+        /* Убираем ограничения ширины и центрирование */
+    }
+}
+
+/* Специальные стили для iPhone с челкой и Dynamic Island */
+@media (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3),
+(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2),
+(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3),
+(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3),
+(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) {
+
+    .ios-navbar {
+        padding-top: max(env(safe-area-inset-top), 20px);
+    }
+
+    .ios-bottom-nav {
+        padding-bottom: max(env(safe-area-inset-bottom), 20px);
+    }
+
+    .ios-content {
+        padding-top: max(env(safe-area-inset-top), 20px);
+        padding-bottom: calc(80px + env(safe-area-inset-bottom));
+    }
+}
+
+/* Дополнительная поддержка для новых iPhone с Dynamic Island */
+@supports (padding: max(0px)) {
+    .ios-navbar {
+        padding-top: max(env(safe-area-inset-top), 20px);
+        padding-left: max(env(safe-area-inset-left), 16px);
+        padding-right: max(env(safe-area-inset-right), 16px);
+    }
+
+    .ios-bottom-nav {
+        padding-bottom: max(env(safe-area-inset-bottom), 20px);
+        padding-left: max(env(safe-area-inset-left), 0px);
+        padding-right: max(env(safe-area-inset-right), 0px);
+    }
+
+    .ios-content {
+        padding-left: max(env(safe-area-inset-left), 8px);
+        padding-right: max(env(safe-area-inset-right), 8px);
+    }
+}
+
+/* Стили для landscape ориентации на iPhone */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    .ios-navbar {
+        padding-top: max(env(safe-area-inset-top), 10px);
+    }
+
+    .ios-content {
+        padding-top: max(env(safe-area-inset-top), 10px);
+    }
+
+    .ios-bottom-nav {
+        display: none;
+        /* Скрываем нижнюю навигацию в landscape */
+    }
+
+    .ios-content {
+        padding-bottom: 20px;
+        /* Уменьшаем отступ снизу */
+    }
+}
+
+/* Анимации в стиле iOS */
+@keyframes ios-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.ios-fade-in {
+    animation: ios-fade-in 0.3s ease-out;
+}
+
+/* Улучшенная типографика */
+.ios-text-large {
+    font-size: var(--ios-font-size-large);
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.ios-text-medium {
+    font-size: var(--ios-font-size-medium);
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+.ios-text-small {
+    font-size: var(--ios-font-size-small);
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+.ios-text-caption {
+    font-size: var(--ios-font-size-caption);
+    font-weight: 400;
+    line-height: 1.3;
+    color: var(--text-secondary);
+}
+
+/* Утилитарные классы */
+.ios-text-center {
+    text-align: center;
+}
+
+.ios-text-left {
+    text-align: left;
+}
+
+.ios-text-right {
+    text-align: right;
+}
+
+.ios-mb-0 {
+    margin-bottom: 0;
+}
+
+.ios-mb-1 {
+    margin-bottom: var(--ios-spacing-small);
+}
+
+.ios-mb-2 {
+    margin-bottom: var(--ios-spacing);
+}
+
+.ios-mb-3 {
+    margin-bottom: var(--ios-spacing-large);
+}
+
+.ios-mt-0 {
+    margin-top: 0;
+}
+
+.ios-mt-1 {
+    margin-top: var(--ios-spacing-small);
+}
+
+.ios-mt-2 {
+    margin-top: var(--ios-spacing);
+}
+
+.ios-mt-3 {
+    margin-top: var(--ios-spacing-large);
+}
+
+.ios-p-0 {
+    padding: 0;
+}
+
+.ios-p-1 {
+    padding: var(--ios-spacing-small);
+}
+
+.ios-p-2 {
+    padding: var(--ios-spacing);
+}
+
+.ios-p-3 {
+    padding: var(--ios-spacing-large);
+}

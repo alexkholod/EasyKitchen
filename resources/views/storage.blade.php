@@ -1,69 +1,64 @@
 @extends('main-layout')
 @section('title')
-    Storage | Easy Kitchen App
+{{ $storage }} | EasyKitchen
+@endsection
+
+@section('navbar-title')
+{{ $storage }}
 @endsection
 
 @section('main-content')
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #0095B6;">
-        <div class="navbar-brand">Easy Kitchen App | {{ $storage }}</div>
-        <div class="navbar-text">Продукты под контролем :)</div>
-    </nav>
-
-    <div class="container">
-        @if ($data->isEmpty())
-        <div class="row mt-3 mb-3">
-            <div class="alert alert-info m-auto">
-                Тут пока ничего нет
-            </div>
-        </div>
-        <div class="row m-auto">
-            <a class="btn btn-primary m-auto" href="{{ route('add-product') }}">
-                Положить что-нибудь
-            </a>
-        </div>
-        @endif
-
+@if ($data->isEmpty())
+<div class="ios-card">
+    <div class="ios-text-center">
+        <div class="ios-text-large ios-mb-2">📦</div>
+        <p class="ios-text-medium ios-mb-2">Тут пока ничего нет</p>
+        <a href="{{ route('add-product') }}" class="ios-button">
+            <svg style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="16" />
+                <line x1="8" y1="12" x2="16" y2="12" />
+            </svg>
+            Положить что-нибудь
+        </a>
+    </div>
+</div>
+@else
+<!-- Список продуктов -->
+<div class="ios-card">
+    <h2 class="ios-card-header">Продукты в {{ $storage }}</h2>
+    <div class="ios-compact-product-list">
         @foreach($data as $element)
-        <div class="col-12 alert alert-info mr-1 mt-3">
-            <a href="{{ route('single', $element->id) }}">
-            <div class="row align-content-center">
-                <div class="col-6"><b>{{ $element->name }}</b></div>
-                <div class="col-4">{{ $element->description }}</div>
-                <div class="col-2">
-                    <form action="{{ route('deleted', $element->id )}}" method="post">
-                        @csrf
-                        {{ Form::submit('☒', ['class' => 'btn btn-info ml-0']) }}
-                    </form>
+        <div class="ios-swipe-container" data-product-id="{{ $element->id }}">
+            <div class="ios-swipe-content" onclick="window.location.href='{{ route('single', $element->id) }}'">
+                <div class="ios-compact-product-info">
+                    <div class="ios-compact-product-name">{{ $element->name }}</div>
+                    <div class="ios-compact-product-meta">
+                        @if($element->description)
+                        <div class="ios-compact-product-description">{{ $element->description }}</div>
+                        @endif
+                        <div class="ios-compact-product-date">{{ \Carbon\Carbon::parse($element->created_at)->format('d.m.Y') }}</div>
+                    </div>
+                </div>
+                <div class="ios-compact-product-arrow">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 18l6-6-6-6" />
+                    </svg>
                 </div>
             </div>
-            </a>
+            <div class="ios-swipe-actions">
+                <button class="ios-swipe-delete" onclick="deleteProduct({{ $element->id }})">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="3,6 5,6 21,6" />
+                        <path d="M19,6v14a2,2 0 0,1 -2,2H7a2,2 0 0,1 -2,-2V6m3,0V4a2,2 0 0,1 2,-2h4a2,2 0 0,1 2,2v2" />
+                        <line x1="10" y1="11" x2="10" y2="17" />
+                        <line x1="14" y1="11" x2="14" y2="17" />
+                    </svg>
+                </button>
+            </div>
         </div>
         @endforeach
-        <div class="row justify-content-center mt-3 mb-auto">
-            <div class="col-12 mb-1">
-                <form action="{{ route('storage', 3 )}}" method="get">
-                    @csrf
-                    {{ Form::submit('Верхний отдел', ['class' => 'btn btn-info col-12 m-auto', 'id' => 3]) }}
-                </form>
-            </div>
-            <div class="col-12 mb-1">
-                <form action="{{ route('storage', 1 )}}" method="get">
-                    @csrf
-                    {{ Form::submit('Средний отдел', ['class' => 'btn btn-info col-12 m-auto', 'id' => 1]) }}
-                </form>
-            </div>
-            <div class="col-12 mb-1">
-                <form action="{{ route('storage', 2 )}}" method="get">
-                    @csrf
-                    {{ Form::submit('Нижний отдел', ['class' => 'btn btn-info col-12 m-auto', 'id' => 2]) }}
-                </form>
-            </div>
-            <div class="col-12 mb-1">
-                <form action="{{ route('storage', 4 )}}" method="get">
-                    @csrf
-                    {{ Form::submit('Холодильник', ['class' => 'btn btn-info col-12 m-auto', 'id' => 4]) }}
-                </form>
-            </div>
-        </div>
     </div>
+</div>
+@endif
 @endsection

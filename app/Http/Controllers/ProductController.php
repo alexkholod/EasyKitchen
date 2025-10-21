@@ -34,8 +34,13 @@ class ProductController extends Controller
     public function viewSingleProduct($id)
     {
         $product = Product::find($id);
+        $storages = Storage::pluck('name', 'id');
 
-        return view('singleProduct', ['product' => $product, 'id' => $id]);
+        return view('singleProduct', [
+            'product' => $product,
+            'id' => $id,
+            'storages' => $storages
+        ]);
     }
 
     public function delete($id)
@@ -64,12 +69,32 @@ class ProductController extends Controller
         return redirect()->route('storage', ['id' => $product->storage_id]);
     }
 
+    public function update(Request $request, $id): RedirectResponse
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'storages' => 'required|exists:storages,id',
+            'description' => 'nullable|string|max:255',
+            'expired_at' => 'nullable|date'
+        ]);
+
+        $product = Product::find($id);
+        $product->name = $request->input('name');
+        $product->storage_id = $request->input('storages');
+        $product->description = $request->input('description');
+        $product->expired_at = $request->input('expired_at');
+
+        $product->save();
+
+        return redirect()->route('storage', ['id' => $product->storage_id]);
+    }
+
     public function makeAddView()
     {
         $storages = Storage::pluck('name', 'id');
 
         return view('addProduct')
-            ->with(compact('storages' ));
+            ->with(compact('storages'));
     }
 
     public function makeMainView()
@@ -82,6 +107,26 @@ class ProductController extends Controller
             'expiredProducts'  => $expiredProducts,
             'expiredSoon' => $expiredSoon,
             'longTimeAgo' => $longTimeAgo
+        ]);
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->get('q');
+        $expiredProducts = $this->expiredProducts();
+
+        $searchResults = collect();
+
+        if ($query) {
+            $searchResults = Product::where('name', 'LIKE', "%{$query}%")
+                ->orWhere('description', 'LIKE', "%{$query}%")
+                ->get();
+        }
+
+        return view('home', [
+            'expiredProducts' => $expiredProducts,
+            'searchResults' => $searchResults,
+            'searchQuery' => $query
         ]);
     }
 
