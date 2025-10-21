@@ -24,6 +24,8 @@
 
     <!-- Стили -->
     <link rel="stylesheet" href="{{ asset('css/ios-styles.css') }}?v=14">
+    <!-- Альтернативный путь для хостинга -->
+    <link rel="stylesheet" href="/css/ios-styles.css?v=14">
 
     <!-- PWA манифест -->
     <link rel="manifest" href="/manifest.json">
